@@ -28,7 +28,7 @@ trait SiteInformationTable extends DatabaseInformation {
  */
 trait SiteInformationReader extends SiteInformationTable {
   def getAll = Database.forURL(dsn, driver = driver) withSession {
-    implicit session => siteinformation.list
+    implicit session => siteinformation.drop(0).take(10).list
   }
 }
 
