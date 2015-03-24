@@ -1,5 +1,6 @@
 *.class
 *.log
+lift_proto.db*
 
 # sbt specific
 .cache/
