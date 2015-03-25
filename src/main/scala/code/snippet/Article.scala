@@ -14,6 +14,18 @@ import Helpers._
  */
 class Article {
   def listTop = {
-    "#panel *" #> SiteInformationDao.getAll.map(v => "#link [href]" #> v._2 & "#title *" #> v._4 & "#image [src]" #> v._6)
+    val list = SiteInformationDao.all
+    "#main *" #> ( "#link [href]" #> list(0)._2 & "#title *" #> list(0)._4 &  "#image [src]" #> {
+      list(0)._6 match {
+        case v if v.isEmpty => "/classpath/foundation/img/noimage.png"
+        case v => v
+      }
+    } ) &
+      "#list *" #> list.drop(1).map(v => "#link [href]" #> v._2 & "#title *" #> v._4 & "#image [src]" #> {
+        v._6 match {
+          case v if v.isEmpty => "/classpath/foundation/img/noimage.png"
+          case v => v
+        }
+      })
   }
 }

@@ -27,9 +27,15 @@ trait SiteInformationTable extends DatabaseInformation {
  * サイト情報取得
  */
 trait SiteInformationReader extends SiteInformationTable {
-  def getAll = Database.forURL(dsn, driver = driver) withSession {
-    implicit session => siteinformation.drop(0).take(10).list
+  def all = Database.forURL(dsn, driver = driver) withSession {
+    implicit session => siteinformation.drop(0).take(3).list
   }
+
+
+  def hostlist = Database.forURL(dsn, driver = driver) withSession {
+    implicit session => siteinformation.map(row => (row.domain)).list.distinct.drop(0).take(3)
+  }
+
 }
 
 /**
