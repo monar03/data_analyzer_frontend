@@ -42,12 +42,12 @@ trait SiteInformationReader extends SiteInformationTable {
  * サイト情報更新
  */
 trait SiteInformationWriter extends SiteInformationTable {
-  def set(id:String, url:String, domain:String, title:String, description:String, image:String) = Database.forURL(dsn, driver = driver) withSession {
-    implicit session => siteinformation +=(id, url, domain, title, description, image, Option(new Timestamp(new Date().getTime)))
+  def set(id:String, url:String, domain:String, title:String, description:String, image:String, site_name:String) = Database.forURL(dsn, driver = driver) withSession {
+    implicit session => siteinformation +=(id, url, domain, title, description, image, site_name, Option(new Timestamp(new Date().getTime)))
   }
 }
 
-class SiteInformation(tag: Tag) extends Table[(String, String, String, String, String, String, Option[Timestamp])](tag, "site_data"){
+class SiteInformation(tag: Tag) extends Table[(String, String, String, String, String, String, String, Option[Timestamp])](tag, "site_data"){
   /**
    * ID
    * @return
@@ -85,10 +85,16 @@ class SiteInformation(tag: Tag) extends Table[(String, String, String, String, S
   def image = column[String]("image")
 
   /**
+   * イメージ
+   * @return
+   */
+  def site_name = column[String]("site_name")
+
+  /**
    * 取得日時
    * @return
    */
   def date = column[Option[Timestamp]]("date")
 
-  def * : ProvenShape[(String, String, String, String, String, String, Option[Timestamp])] = (id, url, domain, title, description, image, date)
+  def * : ProvenShape[(String, String, String, String, String, String, String, Option[Timestamp])] = (id, url, domain, title, description, image, site_name, date)
 }
