@@ -28,9 +28,12 @@ trait SiteInformationTable extends DatabaseInformation {
  */
 trait SiteInformationReader extends SiteInformationTable {
   def all = Database.forURL(dsn, driver = driver) withSession {
-    implicit session => siteinformation.drop(0).take(3).list
+    implicit session => siteinformation.drop(0).take(5).list
   }
 
+  def host(hostname:String) = Database.forURL(dsn, driver=driver) withSession{
+    implicit session => siteinformation.filter(_.domain === hostname).sortBy(_.date.desc).drop(0).take(5).list
+  }
 
   def hostlist = Database.forURL(dsn, driver = driver) withSession {
     implicit session => siteinformation.map(row => (row.domain)).list.distinct.drop(0).take(3)
