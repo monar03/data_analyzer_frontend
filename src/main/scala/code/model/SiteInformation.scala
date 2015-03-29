@@ -36,7 +36,7 @@ trait SiteInformationReader extends SiteInformationTable {
   }
 
   def hostlist = Database.forURL(dsn, driver = driver) withSession {
-    implicit session => siteinformation.map(row => (row.domain)).list.distinct.drop(0).take(3)
+    implicit session => siteinformation.sortBy(_.date.desc).map(row => (row.domain, row.site_name)).list.distinct.drop(0).take(6)
   }
 
 }

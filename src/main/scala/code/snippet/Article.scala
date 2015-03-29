@@ -14,7 +14,7 @@ import Helpers._
  */
 class Article {
   def listTop = {
-    val site_list = SiteListDao.all
+    val site_list = SiteInformationDao.hostlist
     "#panel *" #> site_list.map ( v => {
 
         val list = SiteInformationDao.host(v._1)
@@ -32,10 +32,10 @@ class Article {
             case v => "#site_name *" #> v
           }
         } & "#date *" #> list(0)._8.get.toString) &
-          "#list *" #> list.drop(1).map(v => "#link [href]" #> v._2 & "#title *" #> v._4 & "#image [src]" #> {
+          "#list *" #> list.drop(1).map(v => "#link [href]" #> v._2 & "#title *" #> v._4 & "#image" #> {
             v._6 match {
-              case v if v.isEmpty => "/classpath/foundation/img/noimage.png"
-              case v => v
+              case v if v.isEmpty => "#image" #> NodeSeq.Empty
+              case v => "#image img [src]" #> v
             }
           } & {
             v._7 match {
