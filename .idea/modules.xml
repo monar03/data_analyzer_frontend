@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data_analyzer_frontend.iml" filepath="$PROJECT_DIR$/.idea/modules/data_analyzer_frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data_analyzer_frontend-build.iml" filepath="$PROJECT_DIR$/.idea/modules/data_analyzer_frontend-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/datafetcher_frontend_prototype.iml" filepath="$PROJECT_DIR$/.idea/modules/datafetcher_frontend_prototype.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/datafetcher_frontend_prototype-build.iml" filepath="$PROJECT_DIR$/.idea/modules/datafetcher_frontend_prototype-build.iml" />
     </modules>

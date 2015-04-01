@@ -14,6 +14,7 @@ import Helpers._
  */
 class Article {
   def listTop = {
+    SiteListDao.all
     val site_list = SiteInformationDao.hostlist
     "#panel *" #> site_list.map ( v => {
 
